@@ -1,4 +1,3 @@
-
 # OOP and SQL
 
 This morning we will be using Object Oriented Programming to interface with the Chinook SQL Database
@@ -77,16 +76,16 @@ tables
 
 The class should have an ```__init__()``` method.
 
->Hint: *methods* are just functions inside classes with ```self``` as the first parameter of the function.
+>Hint: *methods* are just functions inside classes with ```self``` as the first argument of the function.
 
 >**Example:** 
 
 >```class NameOfClass():
-    def name_of_method(self, other_paramaters_if_needed):
+    def name_of_method(self, other_arguments_if_needed):
         code here```
         
 
-The ```__init__()``` method should have two paramaters:
+The ```__init__()``` method should have two arguments:
 1. ```self```
 2. ```database_path```
 
@@ -120,7 +119,7 @@ test.run_test(data.tables, 'tables')
 
 This method should use ```pd.read_sql``` to return a dataframe with a single row for the employee you search for.
 
-<u>```search_employees``` should receive three parameters.</u>
+<u>```search_employees``` should receive three arguments.</u>
 1. ```self```
 2. The firstname of an employee.
 3. The lastname of an employee.
