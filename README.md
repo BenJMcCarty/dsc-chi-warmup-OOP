@@ -195,10 +195,10 @@ class Chinook():
 # __SOLUTION__
 class Chinook():
     def __init__(self, database_path):
-        Chinook.conn = sqlite3.connect(path)
-        Chinook.cursor = Chinook.conn.cursor()
+        self.conn = sqlite3.connect(database_path)
+        self.cursor = self.conn.cursor()
 
-        tables = Chinook.cursor.execute('''SELECT name FROM sqlite_master
+        tables = self.cursor.execute('''SELECT name FROM sqlite_master
                                         WHERE
                                         type = 'table'
                                         AND
@@ -242,10 +242,10 @@ If the employee is not found, the method should return the string ```'Employee w
 ```python
 class Chinook():
     def __init__(self, database_path):
-        Chinook.conn = sqlite3.connect(path)
-        Chinook.cursor = Chinook.conn.cursor()
+        self.conn = sqlite3.connect(database_path)
+        self.cursor = self.conn.cursor()
 
-        tables = Chinook.cursor.execute('''SELECT name FROM sqlite_master
+        tables = self.cursor.execute('''SELECT name FROM sqlite_master
                                         WHERE
                                         type = 'table'
                                         AND
@@ -262,10 +262,10 @@ class Chinook():
 # __SOLUTION__
 class Chinook():
     def __init__(self, database_path):
-        Chinook.conn = sqlite3.connect(path)
-        Chinook.cursor = Chinook.conn.cursor()
+        self.conn = sqlite3.connect(database_path)
+        self.cursor = self.conn.cursor()
 
-        tables = Chinook.cursor.execute('''SELECT name FROM sqlite_master
+        tables = self.cursor.execute('''SELECT name FROM sqlite_master
                                         WHERE
                                         type = 'table'
                                         AND
@@ -275,7 +275,7 @@ class Chinook():
     def search_employee(self, firstname, lastname):
         result = pd.read_sql('''SELECT * FROM employees
                                 WHERE FirstName = "{}"
-                                AND LastName = "{}"'''.format(firstname, lastname), Chinook.conn)
+                                AND LastName = "{}"'''.format(firstname, lastname), self.conn)
         if len(result) < 1:
             return 'Employee was not found.'
             
@@ -335,10 +335,10 @@ Take a look at it, and in a markdown cell, describe what the additions are doing
 ```python
 class Chinook():
     def __init__(self, database_path):
-        Chinook.conn = sqlite3.connect(path)
-        Chinook.cursor = Chinook.conn.cursor()
+        self.conn = sqlite3.connect(database_path)
+        self.cursor = Chinook.conn.cursor()
 
-        tables = Chinook.cursor.execute('''SELECT name FROM sqlite_master
+        tables = self.cursor.execute('''SELECT name FROM sqlite_master
                                         WHERE
                                         type = 'table'
                                         AND
@@ -346,17 +346,17 @@ class Chinook():
         self.tables = [x[0] for x in tables]
         
         # =========== NEW ADDITION HERE ==========
-        genres = Chinook.cursor.execute('''SELECT DISTINCT(Name) from genres;''').fetchall()
+        genres = self.cursor.execute('''SELECT DISTINCT(Name) from genres;''').fetchall()
         self.genres = [x[0] for x in genres]
         
         # =========== NEW ADDITION HERE ==========
         for table in self.tables:
-            entire_table = pd.read_sql('''SELECT * FROM {}'''.format(table), Chinook.conn)
+            entire_table = pd.read_sql('''SELECT * FROM {}'''.format(table), self.conn)
             setattr(self, table, entire_table)
     
     # =========== NEW ADDITION HERE ========== 
     def query(self, query_string):
-        return pd.read_sql(query_string, Chinook.conn)
+        return pd.read_sql(query_string, self.conn)
 
     
     def search_employee(self, firstname, lastname):
@@ -384,10 +384,10 @@ class Chinook():
 # __SOLUTION__
 class Chinook():
     def __init__(self, database_path):
-        Chinook.conn = sqlite3.connect(path)
-        Chinook.cursor = Chinook.conn.cursor()
+        self.conn = sqlite3.connect(database_path)
+        self.cursor = Chinook.conn.cursor()
 
-        tables = Chinook.cursor.execute('''SELECT name FROM sqlite_master
+        tables = self.cursor.execute('''SELECT name FROM sqlite_master
                                         WHERE
                                         type = 'table'
                                         AND
@@ -396,12 +396,12 @@ class Chinook():
         
         # =========== NEW ADDITION HERE ===========
         for table in self.tables:
-            entire_table = pd.read_sql('''SELECT * FROM {}'''.format(table), Chinook.conn)
+            entire_table = pd.read_sql('''SELECT * FROM {}'''.format(table), self.conn)
             setattr(self, table, entire_table)
     
     # =========== NEW ADDITION HERE ========== 
     def query(self, query_string):
-        return pd.read_sql(query_string, Chinook.conn)
+        return pd.read_sql(query_string, self.conn)
 
     
     def search_employee(self, firstname, lastname):
