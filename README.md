@@ -177,7 +177,7 @@ Take a look at it, and in a markdown cell, describe what the additions are doing
 class Chinook():
     def __init__(self, database_path):
         self.conn = sqlite3.connect(database_path)
-        self.cursor = Chinook.conn.cursor()
+        self.cursor = self.conn.cursor()
 
         tables = self.cursor.execute('''SELECT name FROM sqlite_master
                                         WHERE
